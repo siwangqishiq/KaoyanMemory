@@ -20,19 +20,19 @@ public class Maze {
 	}
 
 	public static boolean canGo(int x, int y, int[][] map) {
-		if (y < 0 || y >= map.length) {// ĞĞÔ½½çÇé¿ö
+		if (y < 0 || y >= map.length) {// è¡Œè¶Šç•Œæƒ…å†µ
 			return false;
-		} else if (x < 0 || x >= map[y].length) {// ÁĞÔ½½çÇé¿ö
+		} else if (x < 0 || x >= map[y].length) {// åˆ—è¶Šç•Œæƒ…å†µ
 			return false;
 		}
-		if (map[y][x] != 0) {// ÕÏ°­Îï
+		if (map[y][x] != 0) {// éšœç¢ç‰©
 			return false;
 		}
 		return true;
 	}
 	
 	/**
-	 * ÅĞ¶ÏÊÇ·ñÓĞÖØ¸´µã
+	 * åˆ¤æ–­æ˜¯å¦æœ‰é‡å¤ç‚¹
 	 * @param x
 	 * @param y
 	 * @param base
@@ -42,7 +42,7 @@ public class Maze {
 		for(int i=0;i<base.size();i++){
 			Point p=base.get(i);
 			if(p.x==x && p.y==y){
-				//System.out.println("ÖØ¸´µã!");
+				//System.out.println("é‡å¤ç‚¹!");
 				return true;
 			}
 		}//end for i
@@ -67,9 +67,9 @@ public class Maze {
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
 				System.out.print(map[i][j] + "  ");
-			}// end for ÁĞ
+			}// end for åˆ—
 			System.out.println();
-		}// end for ĞĞ
+		}// end for è¡Œ
 	}
 
 	public static Stack<Point> mazePath(Point startPt, Point endPt, int map[][]) {
@@ -78,45 +78,45 @@ public class Maze {
 		int i=0;
 		while(true){
 			i++;
-			if (curPt.isSame(endPt)) {// µ½´ïÖÕµã
+			if (curPt.isSame(endPt)) {// åˆ°è¾¾ç»ˆç‚¹
 				stack.push(curPt);
 				return stack;
 			}
-			// ²»ÔÚÖÕµã
-			if(!curPt.right){//ÓÒ±ßÎ´±»·ÃÎÊ
-				curPt.right=true;//±êÊ¾ÓÒ±ßÒÑ±»·ÃÎÊ
-				if(canGo(curPt.x+1, curPt.y, map) && !haveSamePoint(curPt.x+1, curPt.y,stack)){//ÓÒ±ß¿É´ï
-					stack.push(curPt);//µ±Ç°µãÈëÕ»
-					curPt=new Point(curPt.x+1, curPt.y);//µ±Ç°µãÒÆ¶¯µ½ÓÒ±ß
+			// ä¸åœ¨ç»ˆç‚¹
+			if(!curPt.right){//å³è¾¹æœªè¢«è®¿é—®
+				curPt.right=true;//æ ‡ç¤ºå³è¾¹å·²è¢«è®¿é—®
+				if(canGo(curPt.x+1, curPt.y, map) && !haveSamePoint(curPt.x+1, curPt.y,stack)){//å³è¾¹å¯è¾¾
+					stack.push(curPt);//å½“å‰ç‚¹å…¥æ ˆ
+					curPt=new Point(curPt.x+1, curPt.y);//å½“å‰ç‚¹ç§»åŠ¨åˆ°å³è¾¹
 					curPt.left=true;
 					continue;
 				}
 			}//end if
-			if(!curPt.down){//ÏÂ±ßÎ´±»·ÃÎÊ
-				curPt.down=true;//±êÊ¾ÏÂ±ßÒÑ±»·ÃÎÊ
-				if(canGo(curPt.x, curPt.y+1, map) && !haveSamePoint(curPt.x,curPt.y+1,stack)){//ÓÒ±ß¿É´ï
-					stack.push(curPt);//µ±Ç°µãÈëÕ»
-					curPt=new Point(curPt.x, curPt.y+1);//µ±Ç°µãÒÆ¶¯µ½ÏÂÃæ
+			if(!curPt.down){//ä¸‹è¾¹æœªè¢«è®¿é—®
+				curPt.down=true;//æ ‡ç¤ºä¸‹è¾¹å·²è¢«è®¿é—®
+				if(canGo(curPt.x, curPt.y+1, map) && !haveSamePoint(curPt.x,curPt.y+1,stack)){//å³è¾¹å¯è¾¾
+					stack.push(curPt);//å½“å‰ç‚¹å…¥æ ˆ
+					curPt=new Point(curPt.x, curPt.y+1);//å½“å‰ç‚¹ç§»åŠ¨åˆ°ä¸‹é¢
 					curPt.up=true;
 					continue;
 				}
 			}//end if
 			
-			if(!curPt.left){//×ó±ßÎ´±»·ÃÎÊ
-				curPt.left=true;//±êÊ¾ÏÂ±ßÒÑ±»·ÃÎÊ
-				if(canGo(curPt.x-1, curPt.y, map) && !haveSamePoint(curPt.x-1,curPt.y,stack)){//×ó±ß¿É´ï
-					stack.push(curPt);//µ±Ç°µãÈëÕ»
-					curPt=new Point(curPt.x-1, curPt.y);//µ±Ç°µãÒÆ¶¯µ½ÏÂÃæ
+			if(!curPt.left){//å·¦è¾¹æœªè¢«è®¿é—®
+				curPt.left=true;//æ ‡ç¤ºä¸‹è¾¹å·²è¢«è®¿é—®
+				if(canGo(curPt.x-1, curPt.y, map) && !haveSamePoint(curPt.x-1,curPt.y,stack)){//å·¦è¾¹å¯è¾¾
+					stack.push(curPt);//å½“å‰ç‚¹å…¥æ ˆ
+					curPt=new Point(curPt.x-1, curPt.y);//å½“å‰ç‚¹ç§»åŠ¨åˆ°ä¸‹é¢
 					curPt.right=true;
 					continue;
 				}
 			}//end if
 			
-			if(!curPt.up){//ÉÏ±ßÎ´±»·ÃÎÊ
-				curPt.up=true;//±êÊ¾ÉÏ±ßÒÑ±»·ÃÎÊ
-				if(canGo(curPt.x, curPt.y-1, map) && !haveSamePoint(curPt.x,curPt.y-1,stack)){//ÓÒ±ß¿É´ï
-					stack.push(curPt);//µ±Ç°µãÈëÕ»
-					curPt=new Point(curPt.x, curPt.y-1);//µ±Ç°µãÒÆ¶¯µ½ÏÂÃæ
+			if(!curPt.up){//ä¸Šè¾¹æœªè¢«è®¿é—®
+				curPt.up=true;//æ ‡ç¤ºä¸Šè¾¹å·²è¢«è®¿é—®
+				if(canGo(curPt.x, curPt.y-1, map) && !haveSamePoint(curPt.x,curPt.y-1,stack)){//å³è¾¹å¯è¾¾
+					stack.push(curPt);//å½“å‰ç‚¹å…¥æ ˆ
+					curPt=new Point(curPt.x, curPt.y-1);//å½“å‰ç‚¹ç§»åŠ¨åˆ°ä¸‹é¢
 					curPt.down=true;
 					continue;
 				}
@@ -124,7 +124,7 @@ public class Maze {
 			if(!stack.isEmpty()){
 				curPt=stack.pop();
 			}else{
-				System.out.println("ÎŞÂ·¾¶!");
+				System.out.println("æ— è·¯å¾„!");
 				break;
 			}
 		}//end while
