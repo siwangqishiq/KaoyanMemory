@@ -75,9 +75,7 @@ public class Maze {
 	public static Stack<Point> mazePath(Point startPt, Point endPt, int map[][]) {
 		Stack<Point> stack = new Stack<Point>();
 		Point curPt = startPt;// current point
-		int i=0;
 		while(true){
-			i++;
 			if (curPt.isSame(endPt)) {// 到达终点
 				stack.push(curPt);
 				return stack;
